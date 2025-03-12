@@ -6,81 +6,131 @@
     <title>Interactive Web Features</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
+            background-color: #f8f5ff;
+            color: #333;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #6a11cb;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
         
         .section {
             margin-bottom: 30px;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 5px;
+            border: none;
+            padding: 25px;
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 6px 16px rgba(106, 17, 203, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.15);
         }
         
         h2 {
-            color: #333;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+            color: #6a11cb;
+            border-bottom: 2px solid #e6e0fa;
+            padding-bottom: 12px;
+            font-weight: 600;
         }
         
         button {
-            padding: 8px 15px;
-            margin: 5px;
-            background-color: #4CAF50;
+            padding: 10px 18px;
+            margin: 6px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.2s;
         }
         
         button:hover {
-            background-color: #45a049;
+            background: linear-gradient(135deg, #5b0eb2 0%, #1e68e0 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         
         input, select {
-            padding: 8px;
-            margin: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 10px 12px;
+            margin: 6px;
+            border: 2px solid #e6e0fa;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: #6a11cb;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
         
         table, th, td {
-            border: 1px solid #ddd;
+            border: none;
         }
         
         th, td {
-            padding: 12px;
+            padding: 15px;
             text-align: left;
         }
         
         th {
-            background-color: #f2f2f2;
+            background-color: #6a11cb;
+            color: white;
+            font-weight: 500;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f5ff;
+        }
+        
+        tr:hover {
+            background-color: #e6e0fa;
         }
         
         .gallery {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
+            justify-content: center;
         }
         
         .thumbnail {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
             cursor: pointer;
             border: 3px solid transparent;
             transition: all 0.3s;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         .thumbnail:hover {
-            border-color: #4CAF50;
+            border-color: #6a11cb;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(106, 17, 203, 0.2);
         }
         
         .modal {
@@ -99,6 +149,8 @@
         .modal-content {
             max-width: 80%;
             max-height: 80%;
+            border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
         
         .close-modal {
@@ -106,31 +158,58 @@
             top: 20px;
             right: 30px;
             color: white;
-            font-size: 30px;
+            font-size: 35px;
             cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .close-modal:hover {
+            color: #6a11cb;
+            transform: scale(1.1);
         }
         
         #styleElement {
             width: 200px;
             height: 200px;
-            background-color: #3498db;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
             font-weight: bold;
-            transition: all 0.3s;
+            font-size: 1.2rem;
+            transition: all 0.4s;
+            margin: 0 auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        
+        #itemList {
+            background-color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        #itemList li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e6e0fa;
+            transition: all 0.2s;
+        }
+        
+        #itemList li:hover {
+            padding-left: 5px;
+            color: #6a11cb;
         }
     </style>
 </head>
 <body>
     <h1>Interactive Web Features</h1>
     
-    <!-- Feature 1: Change style of an HTML element -->
     <div class="section">
         <h2>Feature 1: Change Style of an HTML Element</h2>
         <div id="styleElement">Style Me!</div>
-        <div style="margin-top: 20px;">
+        <div style="margin-top: 20px; text-align: center;">
             <button onclick="changeColor()">Change Color</button>
             <button onclick="changeSize()">Change Size</button>
             <button onclick="changeShape()">Change Shape</button>
@@ -138,10 +217,9 @@
         </div>
     </div>
     
-    <!-- Feature 2: List Manipulation -->
     <div class="section">
         <h2>Feature 2: List Manipulation</h2>
-        <div>
+        <div style="text-align: center;">
             <input type="text" id="newItem" placeholder="Add new item">
             <button onclick="addItem()">Add Item</button>
         </div>
@@ -153,7 +231,7 @@
             <li>Grapes</li>
             <li>Banana</li>
         </ul>
-        <div>
+        <div style="text-align: center;">
             <button onclick="sortList()">Sort Alphabetically</button>
             <button onclick="removeDuplicates()">Remove Duplicates</button>
             <button onclick="reverseList()">Reverse Order</button>
@@ -161,10 +239,9 @@
         </div>
     </div>
     
-    <!-- Feature 3: Interactive Table -->
     <div class="section">
         <h2>Feature 3: Interactive Table</h2>
-        <div>
+        <div style="text-align: center; margin-bottom: 15px;">
             <input type="text" id="nameInput" placeholder="Name">
             <input type="text" id="ageInput" placeholder="Age">
             <input type="text" id="cityInput" placeholder="City">
@@ -202,11 +279,9 @@
         </table>
     </div>
     
-    <!-- Feature 4: Interactive Image Gallery -->
     <div class="section">
         <h2>Feature 4: Interactive Image Gallery</h2>
         <div class="gallery">
-            <!-- Using placeholder images -->
             <img src="car1.PNG" alt="Image 1" class="thumbnail" onclick="openModal(this.src)">
             <img src="car2.jpg" alt="Image 2" class="thumbnail" onclick="openModal(this.src)">
             <img src="car3.jpg" alt="Image 3" class="thumbnail" onclick="openModal(this.src)">
@@ -214,24 +289,27 @@
         </div>
     </div>
     
-    <!-- Modal for Image Gallery -->
     <div id="imageModal" class="modal">
         <span class="close-modal" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
 
     <script>
-        // Original list items for reset
         const originalItems = Array.from(document.querySelectorAll('#itemList li')).map(li => li.textContent);
         
-        // Feature 1: Change style functions
         function changeColor() {
             const element = document.getElementById('styleElement');
-            const colors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6'];
-            const currentColor = element.style.backgroundColor || '#3498db';
+            const colors = [
+                'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)',
+                'linear-gradient(135deg, #ff0844 0%, #ffb199 100%)',
+                'linear-gradient(135deg, #00c6fb 0%, #005bea 100%)',
+                'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+            ];
+            const currentColor = element.style.background;
             const currentIndex = colors.indexOf(currentColor);
             const nextIndex = (currentIndex + 1) % colors.length;
-            element.style.backgroundColor = colors[nextIndex];
+            element.style.background = colors[nextIndex];
         }
         
         function changeSize() {
@@ -265,13 +343,12 @@
         
         function resetStyle() {
             const element = document.getElementById('styleElement');
-            element.style.backgroundColor = '#3498db';
+            element.style.background = 'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)';
             element.style.width = '200px';
             element.style.height = '200px';
             element.style.borderRadius = '0px';
         }
         
-        // Feature 2: List manipulation functions
         function addItem() {
             const newItemText = document.getElementById('newItem').value.trim();
             if (newItemText) {
@@ -288,7 +365,6 @@
             
             items.sort((a, b) => a.textContent.localeCompare(b.textContent));
             
-            // Clear the list and append sorted items
             while (list.firstChild) {
                 list.removeChild(list.firstChild);
             }
@@ -305,7 +381,6 @@
                 uniqueItems.add(item.textContent);
             });
             
-            // Clear the list and append unique items
             while (list.firstChild) {
                 list.removeChild(list.firstChild);
             }
@@ -321,10 +396,8 @@
             const list = document.getElementById('itemList');
             const items = Array.from(list.getElementsByTagName('li'));
             
-            // Reverse the array
             items.reverse();
             
-            // Clear the list and append reversed items
             while (list.firstChild) {
                 list.removeChild(list.firstChild);
             }
@@ -335,12 +408,10 @@
         function resetList() {
             const list = document.getElementById('itemList');
             
-            // Clear the list
             while (list.firstChild) {
                 list.removeChild(list.firstChild);
             }
             
-            // Add original items back
             originalItems.forEach(text => {
                 const newItem = document.createElement('li');
                 newItem.textContent = text;
@@ -348,7 +419,6 @@
             });
         }
         
-        // Feature 3: Interactive Table functions
         function addRow() {
             const name = document.getElementById('nameInput').value.trim();
             const age = document.getElementById('ageInput').value.trim();
@@ -372,7 +442,6 @@
                     <button onclick="deleteRow(this)">Delete</button>
                 `;
                 
-                // Clear input fields
                 document.getElementById('nameInput').value = '';
                 document.getElementById('ageInput').value = '';
                 document.getElementById('cityInput').value = '';
@@ -387,12 +456,10 @@
             const age = cells[1].textContent;
             const city = cells[2].textContent;
             
-            // Fill input fields with current values
             document.getElementById('nameInput').value = name;
             document.getElementById('ageInput').value = age;
             document.getElementById('cityInput').value = city;
             
-            // Delete the row (it will be added back with updated values)
             deleteRow(button);
         }
         
@@ -401,20 +468,18 @@
             row.parentNode.removeChild(row);
         }
         
-        // Feature 4: Interactive Image Gallery functions
         function openModal(src) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
             
             modal.style.display = 'flex';
-            modalImg.src = src.replace('100/100', '400/400'); // Larger image
+            modalImg.src = src.replace('100/100', '400/400');
         }
         
         function closeModal() {
             document.getElementById('imageModal').style.display = 'none';
         }
         
-        // Close modal when clicking outside the image
         window.onclick = function(event) {
             const modal = document.getElementById('imageModal');
             if (event.target === modal) {

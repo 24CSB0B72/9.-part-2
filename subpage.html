@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Web Features</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        h2 {
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        input, select {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .thumbnail:hover {
+            border-color: #4CAF50;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        #styleElement {
+            width: 200px;
+            height: 200px;
+            background-color: #3498db;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Web Features</h1>
+    
+    <!-- Feature 1: Change style of an HTML element -->
+    <div class="section">
+        <h2>Feature 1: Change Style of an HTML Element</h2>
+        <div id="styleElement">Style Me!</div>
+        <div style="margin-top: 20px;">
+            <button onclick="changeColor()">Change Color</button>
+            <button onclick="changeSize()">Change Size</button>
+            <button onclick="changeShape()">Change Shape</button>
+            <button onclick="resetStyle()">Reset</button>
+        </div>
+    </div>
+    
+    <!-- Feature 2: List Manipulation -->
+    <div class="section">
+        <h2>Feature 2: List Manipulation</h2>
+        <div>
+            <input type="text" id="newItem" placeholder="Add new item">
+            <button onclick="addItem()">Add Item</button>
+        </div>
+        <ul id="itemList">
+            <li>Apple</li>
+            <li>Banana</li>
+            <li>Orange</li>
+            <li>Apple</li>
+            <li>Grapes</li>
+            <li>Banana</li>
+        </ul>
+        <div>
+            <button onclick="sortList()">Sort Alphabetically</button>
+            <button onclick="removeDuplicates()">Remove Duplicates</button>
+            <button onclick="reverseList()">Reverse Order</button>
+            <button onclick="resetList()">Reset</button>
+        </div>
+    </div>
+    
+    <!-- Feature 3: Interactive Table -->
+    <div class="section">
+        <h2>Feature 3: Interactive Table</h2>
+        <div>
+            <input type="text" id="nameInput" placeholder="Name">
+            <input type="text" id="ageInput" placeholder="Age">
+            <input type="text" id="cityInput" placeholder="City">
+            <button onclick="addRow()">Add Row</button>
+        </div>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>28</td>
+                    <td>New York</td>
+                    <td>
+                        <button onclick="editRow(this)">Edit</button>
+                        <button onclick="deleteRow(this)">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>32</td>
+                    <td>London</td>
+                    <td>
+                        <button onclick="editRow(this)">Edit</button>
+                        <button onclick="deleteRow(this)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Feature 4: Interactive Image Gallery -->
+    <div class="section">
+        <h2>Feature 4: Interactive Image Gallery</h2>
+        <div class="gallery">
+            <!-- Using placeholder images -->
+            <img src="car1.PNG" alt="Image 1" class="thumbnail" onclick="openModal(this.src)">
+            <img src="car2.jpg" alt="Image 2" class="thumbnail" onclick="openModal(this.src)">
+            <img src="car3.jpg" alt="Image 3" class="thumbnail" onclick="openModal(this.src)">
+            <img src="car4.jfif" alt="Image 4" class="thumbnail" onclick="openModal(this.src)">
+        </div>
+    </div>
+    
+    <!-- Modal for Image Gallery -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // Original list items for reset
+        const originalItems = Array.from(document.querySelectorAll('#itemList li')).map(li => li.textContent);
+        
+        // Feature 1: Change style functions
+        function changeColor() {
+            const element = document.getElementById('styleElement');
+            const colors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6'];
+            const currentColor = element.style.backgroundColor || '#3498db';
+            const currentIndex = colors.indexOf(currentColor);
+            const nextIndex = (currentIndex + 1) % colors.length;
+            element.style.backgroundColor = colors[nextIndex];
+        }
+        
+        function changeSize() {
+            const element = document.getElementById('styleElement');
+            const currentWidth = parseInt(element.style.width) || 200;
+            
+            if (currentWidth === 200) {
+                element.style.width = '250px';
+                element.style.height = '250px';
+            } else if (currentWidth === 250) {
+                element.style.width = '300px';
+                element.style.height = '300px';
+            } else {
+                element.style.width = '200px';
+                element.style.height = '200px';
+            }
+        }
+        
+        function changeShape() {
+            const element = document.getElementById('styleElement');
+            const currentBorderRadius = element.style.borderRadius || '0px';
+            
+            if (currentBorderRadius === '0px') {
+                element.style.borderRadius = '20px';
+            } else if (currentBorderRadius === '20px') {
+                element.style.borderRadius = '50%';
+            } else {
+                element.style.borderRadius = '0px';
+            }
+        }
+        
+        function resetStyle() {
+            const element = document.getElementById('styleElement');
+            element.style.backgroundColor = '#3498db';
+            element.style.width = '200px';
+            element.style.height = '200px';
+            element.style.borderRadius = '0px';
+        }
+        
+        // Feature 2: List manipulation functions
+        function addItem() {
+            const newItemText = document.getElementById('newItem').value.trim();
+            if (newItemText) {
+                const newItem = document.createElement('li');
+                newItem.textContent = newItemText;
+                document.getElementById('itemList').appendChild(newItem);
+                document.getElementById('newItem').value = '';
+            }
+        }
+        
+        function sortList() {
+            const list = document.getElementById('itemList');
+            const items = Array.from(list.getElementsByTagName('li'));
+            
+            items.sort((a, b) => a.textContent.localeCompare(b.textContent));
+            
+            // Clear the list and append sorted items
+            while (list.firstChild) {
+                list.removeChild(list.firstChild);
+            }
+            
+            items.forEach(item => list.appendChild(item));
+        }
+        
+        function removeDuplicates() {
+            const list = document.getElementById('itemList');
+            const items = Array.from(list.getElementsByTagName('li'));
+            const uniqueItems = new Set();
+            
+            items.forEach(item => {
+                uniqueItems.add(item.textContent);
+            });
+            
+            // Clear the list and append unique items
+            while (list.firstChild) {
+                list.removeChild(list.firstChild);
+            }
+            
+            Array.from(uniqueItems).forEach(text => {
+                const newItem = document.createElement('li');
+                newItem.textContent = text;
+                list.appendChild(newItem);
+            });
+        }
+        
+        function reverseList() {
+            const list = document.getElementById('itemList');
+            const items = Array.from(list.getElementsByTagName('li'));
+            
+            // Reverse the array
+            items.reverse();
+            
+            // Clear the list and append reversed items
+            while (list.firstChild) {
+                list.removeChild(list.firstChild);
+            }
+            
+            items.forEach(item => list.appendChild(item));
+        }
+        
+        function resetList() {
+            const list = document.getElementById('itemList');
+            
+            // Clear the list
+            while (list.firstChild) {
+                list.removeChild(list.firstChild);
+            }
+            
+            // Add original items back
+            originalItems.forEach(text => {
+                const newItem = document.createElement('li');
+                newItem.textContent = text;
+                list.appendChild(newItem);
+            });
+        }
+        
+        // Feature 3: Interactive Table functions
+        function addRow() {
+            const name = document.getElementById('nameInput').value.trim();
+            const age = document.getElementById('ageInput').value.trim();
+            const city = document.getElementById('cityInput').value.trim();
+            
+            if (name && age && city) {
+                const table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+                const newRow = table.insertRow();
+                
+                const nameCell = newRow.insertCell(0);
+                const ageCell = newRow.insertCell(1);
+                const cityCell = newRow.insertCell(2);
+                const actionsCell = newRow.insertCell(3);
+                
+                nameCell.textContent = name;
+                ageCell.textContent = age;
+                cityCell.textContent = city;
+                
+                actionsCell.innerHTML = `
+                    <button onclick="editRow(this)">Edit</button>
+                    <button onclick="deleteRow(this)">Delete</button>
+                `;
+                
+                // Clear input fields
+                document.getElementById('nameInput').value = '';
+                document.getElementById('ageInput').value = '';
+                document.getElementById('cityInput').value = '';
+            }
+        }
+        
+        function editRow(button) {
+            const row = button.parentNode.parentNode;
+            const cells = row.getElementsByTagName('td');
+            
+            const name = cells[0].textContent;
+            const age = cells[1].textContent;
+            const city = cells[2].textContent;
+            
+            // Fill input fields with current values
+            document.getElementById('nameInput').value = name;
+            document.getElementById('ageInput').value = age;
+            document.getElementById('cityInput').value = city;
+            
+            // Delete the row (it will be added back with updated values)
+            deleteRow(button);
+        }
+        
+        function deleteRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+        
+        // Feature 4: Interactive Image Gallery functions
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            modal.style.display = 'flex';
+            modalImg.src = src.replace('100/100', '400/400'); // Larger image
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>
